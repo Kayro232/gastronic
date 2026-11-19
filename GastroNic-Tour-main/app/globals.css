@@ -1,0 +1,297 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ======================================================
+   * IDENTIDAD DE MARCA (no modificar)
+   * Turquesa, maíz y gris claro son los colores oficiales
+   * de GastroNic Tour.
+   * ====================================================== */
+  --primary-turquoise: #1CA7A6;
+  --primary-yellow: #F4B942;
+  --background-soft: #F7F7F7;
+  --text-dark: #2B2B2B;
+  --text-light-gray: #EAEAEA;
+
+  /* ======================================================
+   * GASTRONIC DS · TONOS DE USO (etapa 1)
+   * Derivados del mismo matiz de la marca para cumplir
+   * contraste WCAG AA. La marca no cambia: #1CA7A6 sigue
+   * siendo el color de superficies, mapa e ilustración.
+   * ====================================================== */
+
+  /* Acción: botones, enlaces y foco (blanco encima 5.13:1) */
+  --action: #147A79;
+  --action-hover: #126968;
+  --action-soft: #EEFAF9;
+  --action-soft-strong: #D3F3F1;
+
+  /* Maíz: calificaciones, destacados y CTA de alto énfasis.
+   * Siempre con texto tinta encima (8.56:1), nunca como texto. */
+  --maiz-hover: #F2A918;
+  --maiz-soft: #FEF6E4;
+  --maiz-ink: #8A5A00;
+
+  /* Neutros con matiz turquesa */
+  --ink: #102A2A;
+  --ink-muted: #5E706C;
+  --surface: #FFFFFF;
+  --surface-2: #EFF3F2;
+  --line: #E2E8E6;
+  --line-strong: #7E8F8B;
+  --ink-deep: #0B201F;
+
+  /* Semánticos */
+  --success: #15803D;
+  --success-soft: #F0FDF4;
+  --warning: #8A5A00;
+  --warning-soft: #FEF6E4;
+  --danger: #B42318;
+  --danger-soft: #FEF3F2;
+
+  /* Capas y estructura */
+  --z-sticky: 20;
+  --z-header: 30;
+  --z-overlay: 40;
+  --z-drawer: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+  --z-tooltip: 80;
+  --header-h: 64px;
+
+  /* Movimiento */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+
+  /* ======================================================
+   * TOKENS SHADCN
+   * ====================================================== */
+  --background: #F7F7F7;
+  --foreground: #102A2A;
+  --card: #FFFFFF;
+  --card-foreground: #102A2A;
+  --popover: #FFFFFF;
+  --popover-foreground: #102A2A;
+  --primary: #1CA7A6;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4B942;
+  --secondary-foreground: #102A2A;
+  --muted: #EAEAEA;
+  --muted-foreground: #5E706C;
+  --accent: #1CA7A6;
+  --accent-foreground: #FFFFFF;
+  --destructive: #B42318;
+  --destructive-foreground: #FFFFFF;
+  --border: #EAEAEA;
+  --input: #FFFFFF;
+  --ring: #147A79;
+  --chart-1: #1CA7A6;
+  --chart-2: #F4B942;
+  --chart-3: #06B6D4;
+  --chart-4: #10B981;
+  --chart-5: #8B5CF6;
+  --radius: 0.75rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #2B2B2B;
+  --sidebar-primary: #1CA7A6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F4B942;
+  --sidebar-accent-foreground: #2B2B2B;
+  --sidebar-border: #EAEAEA;
+  --sidebar-ring: #1CA7A6;
+}
+
+.dark {
+  --background: #1A1A1A;
+  --foreground: #F5F5F5;
+  --card: #2A2A2A;
+  --card-foreground: #F5F5F5;
+  --popover: #2A2A2A;
+  --popover-foreground: #F5F5F5;
+  --primary: #1CA7A6;
+  --primary-foreground: #1A1A1A;
+  --secondary: #F4B942;
+  --secondary-foreground: #1A1A1A;
+  --muted: #404040;
+  --muted-foreground: #A0A0A0;
+  --accent: #1CA7A6;
+  --accent-foreground: #1A1A1A;
+  --destructive: #EF4444;
+  --destructive-foreground: #1A1A1A;
+  --border: #404040;
+  --input: #2A2A2A;
+  --ring: #1CA7A6;
+  --chart-1: #1CA7A6;
+  --chart-2: #F4B942;
+  --chart-3: #06B6D4;
+  --chart-4: #10B981;
+  --chart-5: #8B5CF6;
+  --sidebar: #2A2A2A;
+  --sidebar-foreground: #F5F5F5;
+  --sidebar-primary: #1CA7A6;
+  --sidebar-primary-foreground: #1A1A1A;
+  --sidebar-accent: #F4B942;
+  --sidebar-accent-foreground: #1A1A1A;
+  --sidebar-border: #404040;
+  --sidebar-ring: #1CA7A6;
+}
+
+@theme inline {
+  /* Inter para texto e interfaz; Poppins solo para títulos */
+  --font-sans: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+
+  /* GastroNic DS: colores de uso (bg-action, text-ink, border-line…) */
+  --color-brand-teal: var(--primary-turquoise);
+  --color-brand-maiz: var(--primary-yellow);
+  --color-canvas: var(--background-soft);
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-action-soft: var(--action-soft);
+  --color-action-soft-strong: var(--action-soft-strong);
+  --color-maiz-hover: var(--maiz-hover);
+  --color-maiz-soft: var(--maiz-soft);
+  --color-maiz-ink: var(--maiz-ink);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-deep: var(--ink-deep);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  /* GastroNic DS: radios por rol (rounded-control, rounded-card…) */
+  --radius-chip: 6px;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+
+  /* GastroNic DS: elevación (shadow-raised, shadow-overlay, shadow-modal) */
+  --shadow-raised: 0 4px 16px rgb(16 42 42 / 0.08);
+  --shadow-overlay: 0 12px 32px rgb(16 42 42 / 0.12);
+  --shadow-modal: 0 24px 64px rgb(16 42 42 / 0.18);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Títulos con Poppins; el resto de la interfaz usa Inter. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  /* Foco visible por defecto para teclado (2 px, contraste 5:1).
+   * Los componentes que definen su propio anillo lo mantienen. */
+  :where(a, button, input, select, textarea, summary, [role='button'], [tabindex]:not([tabindex='-1'])):focus-visible {
+    outline: 2px solid var(--action);
+    outline-offset: 2px;
+  }
+
+  /* Los elementos clicables muestran la mano (Tailwind 4 la quitó). */
+  :where(button, [role='button'], summary, label[for], select):not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Antetítulo estándar: 12 px, nunca menor. */
+@utility text-overline {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Desplazamiento suave solo si la persona no pidió reducir movimiento. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Respeta "reducir movimiento" del sistema operativo. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
